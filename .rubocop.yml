@@ -1,0 +1,73 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'test/test_helper.rb'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'node_modules/**/*'
+    - 'config/deploy.rb'
+    - 'config/deploy/**/*'
+
+Metrics/LineLength:
+  Max: 130
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/ModuleLength:
+  Max: 200
+
+Style/GuardClause:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Naming/AccessorMethodName:
+  Exclude:
+    - app/datatables/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+    - features/**/*
+    - config/environments/**/*
+    - config/routes.rb
+    - lib/tasks/cucumber.rake
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Style/EmptyLambdaParameter:
+  Enabled: false
+

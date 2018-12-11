@@ -1,0 +1,31 @@
+{
+  "extends": ["eslint-config-airbnb-base", "prettier", "plugin:react/recommended"],
+
+  "plugins": ["prettier"],
+
+  "env": {
+    "browser": true
+  },
+
+  "rules": {
+    "prettier/prettier": "error"
+  },
+
+  "parser": "babel-eslint",
+
+  "settings": {
+    "react": {
+      "version": "16.6.3"
+    },
+    "import/resolver": {
+      "webpack": {
+        "config": {
+          "resolve": {
+            "modules": ["frontend", "node_modules"]
+          }
+        }
+      }
+    }
+  }
+}
+
