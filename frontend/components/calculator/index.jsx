@@ -2,7 +2,7 @@ import React from "react";
 import Input from "components/input/index.jsx";
 // import PropTypes from "prop-types";
 
-export default class RegistrationForm extends React.Component {
+export default class Calculator extends React.Component {
   // static propTypes = {};
 
   constructor(props) {
@@ -11,6 +11,13 @@ export default class RegistrationForm extends React.Component {
       a: "",
       errors: {}
     };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const { name: inputName, value } = event.target;
+    this.setState({ [inputName]: value });
   }
 
   render() {
