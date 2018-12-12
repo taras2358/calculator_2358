@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Calculation < ApplicationRecord
-  OPERATIONS = %w[+ - * /].freeze
+  OPERATORS = %w[+ - * /].freeze
 
   # Find calcution by its details
   # Check case when order of arguments (a, b) does not matter

@@ -14,7 +14,7 @@ class PerformCalculation < BaseOperation
 
     find_calculation
     if calculation.present?
-      calculation.increment!(:count)
+      increment_caclulation_count!
 
       return success(calculation)
     end
@@ -42,8 +42,12 @@ class PerformCalculation < BaseOperation
     @calculation = Calculation.find_by_operation(@form.serialize)
   end
 
+  def increment_caclulation_count!
+    calculation.increment!(:count)
+  end
+
   def calculate
-    Calculator.new(@form.serialize).calculate
+    calculator_class.new(@form.serialize).calculate
   end
 
   def persist_calculation(result)
@@ -55,5 +59,9 @@ class PerformCalculation < BaseOperation
 
   def form_class
     CalculatorForm
+  end
+
+  def calculator_class
+    Calculator
   end
 end

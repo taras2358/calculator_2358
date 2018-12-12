@@ -3,8 +3,8 @@
 class Calculator
   attr_reader :a, :b, :operator
   def initialize(a:, b:, operator:)
-    @a = BigDecimal.new(a)
-    @b = BigDecimal.new(b)
+    @a = BigDecimal(a)
+    @b = BigDecimal(b)
     @operator = operator
   end
 

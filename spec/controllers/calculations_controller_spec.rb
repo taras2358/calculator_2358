@@ -20,7 +20,7 @@ RSpec.describe CalculationsController, type: :controller do
       before { allow_any_instance_of(described_class).to receive(:calculation_serializer).and_return(calculation_serializer) }
 
       let(:params) do
-        { a: '1', b: '2', operation: '+' }
+        { a: '1', b: '2', operator: '+' }
       end
       before { post :create, params: params, format: :json }
       it 'returns http success' do
@@ -45,7 +45,7 @@ RSpec.describe CalculationsController, type: :controller do
     before { allow_any_instance_of(described_class).to receive(:calculation_service).and_return(calculation_service) }
 
     let(:params) do
-      { a: '1', b: '2', operation: 'blah' }
+      { a: '1', b: '2', operator: 'blah' }
     end
     before { post :create, params: params, format: :json }
     it 'returns http success' do

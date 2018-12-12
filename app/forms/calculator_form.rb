@@ -13,7 +13,7 @@ class CalculatorForm
                 numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 100 }
   validates :b, presence: true,
                 numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 100 }
-  validates :operator, presence: true, inclusion: Calculation::OPERATIONS
+  validates :operator, presence: true, inclusion: Calculation::OPERATORS
 
   validate :zero_division, if: ->(form) { form.operator == '/' }
 
