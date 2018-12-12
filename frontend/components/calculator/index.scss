@@ -1,0 +1,24 @@
+.calculator-containter {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button:disabled {
+    color: #e2e2e2;
+    cursor: not-allowed;
+  }
+
+  input, textarea {
+    width: 100%;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+

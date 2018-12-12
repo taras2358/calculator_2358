@@ -13,7 +13,11 @@ class PerformCalculation < BaseOperation
     return failure(:validation_error, @form) unless valid_form?
 
     find_calculation
-    return success(calculation) if calculation.present?
+    if calculation.present?
+      calculation.increment!(:count)
+
+      return success(calculation)
+    end
 
     calculation_result = calculate
     persist_calculation(calculation_result)
@@ -43,7 +47,7 @@ class PerformCalculation < BaseOperation
   end
 
   def persist_calculation(result)
-    calculation_params = @form.serialize.merge(result: result)
+    calculation_params = @form.serialize.merge(result: result, count: 1)
 
     @calculation = Calculation.new(calculation_params)
     @calculation.save

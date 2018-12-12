@@ -16,7 +16,7 @@ class CalculationSerializer
     { operation: operation,
       result: result,
       id: record.id,
-      count: 0 }
+      count: record.count }
   end
 
   def operation
@@ -24,6 +24,6 @@ class CalculationSerializer
   end
 
   def result
-    record.result
+    record.result.round(10)
   end
 end

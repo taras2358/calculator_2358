@@ -3,6 +3,7 @@ import Input from "components/input/integer_input.jsx";
 import HttpClient from "utils/http_client";
 import IntegerValidator from "utils/integer_validator";
 import Result from "./result.jsx";
+import "./index.scss";
 
 export default class Calculator extends React.Component {
   constructor(props) {
@@ -75,27 +76,38 @@ export default class Calculator extends React.Component {
           onChange={this.handleChange}
           errors={this.state.errors.b}
         />
-        <button
-          type="submit"
-          onClick={() => this.handleSubmit("+")}
-          disabled={disabled}
-        >
-          +
-        </button>
-        <button
-          type="submit"
-          onClick={() => this.handleSubmit("-")}
-          disabled={disabled}
-        >
-          -
-        </button>
-        <button
-          type="submit"
-          onClick={() => this.handleSubmit("/")}
-          disabled={disabled}
-        >
-          /
-        </button>
+        <div className="actions">
+          <button
+            type="submit"
+            onClick={() => this.handleSubmit("+")}
+            disabled={disabled}
+          >
+            +
+          </button>
+          <button
+            type="submit"
+            onClick={() => this.handleSubmit("-")}
+            disabled={disabled}
+          >
+            -
+          </button>
+          <button
+            type="submit"
+            onClick={() => this.handleSubmit("/")}
+            disabled={disabled}
+          >
+            /
+          </button>
+          <button
+            type="submit"
+            onClick={() => this.handleSubmit("*")}
+            disabled={disabled}
+          >
+            *
+          </button>
+        </div>
+        <br />
+        <div>Result</div>
         <Result value={this.state.result} />
       </div>
     );

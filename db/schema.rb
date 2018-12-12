@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -22,8 +20,10 @@ ActiveRecord::Schema.define(version: 2018_12_12_153529) do
     t.integer "b"
     t.string "operator"
     t.decimal "result", precision: 15, scale: 10
+    t.integer "count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["a", "b", "operator"], name: "index_calculations_on_a_and_b_and_operator"
   end
 
 end
