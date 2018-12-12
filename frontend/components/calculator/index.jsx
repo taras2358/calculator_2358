@@ -2,6 +2,7 @@ import React from "react";
 import Input from "components/input/integer_input.jsx";
 import HttpClient from "utils/http_client";
 import IntegerValidator from "utils/integer_validator";
+import Result from "./result.jsx";
 
 export default class Calculator extends React.Component {
   constructor(props) {
@@ -9,33 +10,40 @@ export default class Calculator extends React.Component {
     this.state = {
       a: "",
       b: "",
-      errors: {}
+      result: null,
+      errors: {},
+      inProgress: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validInputData = this.validInputData.bind(this);
+    this.canBeSubmited = this.canBeSubmited.bind(this);
   }
 
   handleSubmit(operation) {
     // e.preventDefault();
+    this.setState({ inProgress: true });
     const body = { a: this.state.a, b: this.state.b, operation };
     const requestBody = JSON.stringify(body);
     const client = HttpClient;
     const request = client.post("/calculations", requestBody);
 
     request
-      .then(() => {
-        window.location.href = "/";
+      .then(responseBody => {
+        // window.location.href = "/";
+        this.setState({ result: responseBody.calculation, inProgress: false });
       })
-      .catch(bodyResponse => {
-        this.setState({ errors: bodyResponse.errors });
+      .catch(responseBody => {
+        this.setState({ errors: responseBody.errors, inProgress: false });
       });
   }
 
   handleChange(event) {
     const { name: inputName, value } = event.target;
-    this.setState({ [inputName]: value });
+    const disabled = this.validInputData();
+
+    this.setState({ [inputName]: value, disabled });
   }
 
   validInputData() {
@@ -45,8 +53,12 @@ export default class Calculator extends React.Component {
     );
   }
 
+  canBeSubmited() {
+    return this.validInputData() && !this.state.inProgress;
+  }
+
   render() {
-    const validInput = this.validInputData();
+    const disabled = !this.canBeSubmited();
     return (
       <div>
         <Input
@@ -66,18 +78,18 @@ export default class Calculator extends React.Component {
         <button
           type="submit"
           onClick={() => this.handleSubmit("+")}
-          disabled={!validInput}
+          disabled={disabled}
         >
           +
         </button>
         <button
           type="submit"
-          onClick={() => this.handleSubmit("=")}
-          disabled={!validInput}
+          onClick={() => this.handleSubmit("-")}
+          disabled={disabled}
         >
           -
         </button>
-        <textarea rows="4" disabled />
+        <Result value={this.state.result} />
       </div>
     );
   }
