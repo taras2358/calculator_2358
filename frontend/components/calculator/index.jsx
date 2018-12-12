@@ -21,10 +21,10 @@ export default class Calculator extends React.Component {
     this.canBeSubmited = this.canBeSubmited.bind(this);
   }
 
-  handleSubmit(operation) {
+  handleSubmit(operator) {
     // e.preventDefault();
     this.setState({ inProgress: true });
-    const body = { a: this.state.a, b: this.state.b, operation };
+    const body = { a: this.state.a, b: this.state.b, operator };
     const requestBody = JSON.stringify(body);
     const client = HttpClient;
     const request = client.post("/calculations", requestBody);
@@ -88,6 +88,13 @@ export default class Calculator extends React.Component {
           disabled={disabled}
         >
           -
+        </button>
+        <button
+          type="submit"
+          onClick={() => this.handleSubmit("/")}
+          disabled={disabled}
+        >
+          /
         </button>
         <Result value={this.state.result} />
       </div>

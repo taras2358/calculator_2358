@@ -42,6 +42,18 @@ group :development, :test do
   gem 'rubocop', '~> 0.61.1', require: false
 end
 
+group :test do
+  # Strategies for cleaning databases. Can be used to ensure a clean state for testing.
+  gem 'database_cleaner', '~> 1.7'
+  # Making tests easy on the fingers and eyes
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
+
+  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
+  gem 'ffaker'
+
+  gem 'rails-controller-testing'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 

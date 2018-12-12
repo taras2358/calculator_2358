@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PerformCalculation < BaseOperation
-  attr_reader :params, :form
+  attr_reader :params, :calculation
   def initialize(params)
     @params = params
   end
@@ -8,10 +10,14 @@ class PerformCalculation < BaseOperation
     initialize_form
     validate_form
 
-    return failure(:validation_error, form) unless valid_form?
+    return failure(:validation_error, @form) unless valid_form?
 
-    # create_user
-    success(Calculation.first)
+    find_calculation
+    return success(calculation) if calculation.present?
+
+    calculation_result = calculate
+    persist_calculation(calculation_result)
+    success(calculation)
   end
 
   private
@@ -21,11 +27,26 @@ class PerformCalculation < BaseOperation
   end
 
   def validate_form
-    form.validate
+    @form.validate
   end
 
   def valid_form?
-    form.errors.blank?
+    @form.errors.blank?
+  end
+
+  def find_calculation
+    @calculation = Calculation.find_by_operation(@form.serialize)
+  end
+
+  def calculate
+    Calculator.new(@form.serialize).calculate
+  end
+
+  def persist_calculation(result)
+    calculation_params = @form.serialize.merge(result: result)
+
+    @calculation = Calculation.new(calculation_params)
+    @calculation.save
   end
 
   def form_class

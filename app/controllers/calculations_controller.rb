@@ -6,7 +6,7 @@ class CalculationsController < ApplicationController
   end
 
   def create
-    calculator = PerformCalculation.new(calculation_params)
+    calculator = calculation_service.new(calculation_params.to_h)
     result = calculator.call
 
     if result.success?
@@ -19,10 +19,14 @@ class CalculationsController < ApplicationController
   protected
 
   def calculation_params
-    params.permit(:a, :b, :operation)
+    params.permit(:a, :b, :operator)
   end
 
   def calculation_serializer
     CalculationSerializer
+  end
+
+  def calculation_service
+    PerformCalculation
   end
 end

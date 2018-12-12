@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OperationResult
   def success?
     false
@@ -32,4 +34,3 @@ class OperationResult
     end
   end
 end
-

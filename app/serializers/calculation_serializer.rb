@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CalculationSerializer
   attr_reader :record
   def initialize(record)
@@ -14,12 +16,11 @@ class CalculationSerializer
     { operation: operation,
       result: result,
       id: record.id,
-      count: 0
-    }
+      count: 0 }
   end
 
   def operation
-    [record.a, record.operation, record.b].join(' ')
+    [record.a, record.operator, record.b].join(' ')
   end
 
   def result
