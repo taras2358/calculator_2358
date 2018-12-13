@@ -44,7 +44,7 @@ export default class Calculator extends React.Component {
     const { name: inputName, value } = event.target;
     const disabled = this.validInputData();
 
-    this.setState({ [inputName]: value, disabled });
+    this.setState({ [inputName]: value, result: null, disabled });
   }
 
   validInputData() {
