@@ -1,24 +1,25 @@
-# README
+# Simple Calculator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Description
 
-Things you may want to cover:
+Simple calculator which operates numbers in range 0..99
 
-* Ruby version
+### Tech
 
-* System dependencies
+* Rails
+* Webpack (react_on_rails gem)
+* Rspec (test coverage)
 
-* Configuration
+### Versions
 
-* Database creation
+* Ruby version - 2.5.3
+* Rails version - 5.2.2
 
-* Database initialization
+### Starting the application
 
-* How to run the test suite
+You could use foreman for starting application and webpack dev server at once
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+gem install foreman
+foreman start
+```
