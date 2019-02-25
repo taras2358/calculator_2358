@@ -52,6 +52,9 @@ group :test do
   gem 'ffaker'
 
   gem 'rails-controller-testing'
+
+  gem 'capybara', '>= 2.15', '< 4.0'
+  gem 'capybara-webkit'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

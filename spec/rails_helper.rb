@@ -46,6 +46,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  #
+  config.before(:suite) do
+    # compile front-end and load manifest
+    # `bin/webpack`
+    # Webpacker::Manifest.send(:load)
+  end
 end
 
 Shoulda::Matchers.configure do |config|
@@ -54,3 +60,23 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+Capybara.javascript_driver = :webkit
+Capybara::Webkit.configure do |config|
+  # Allow pages to make requests to any URL without issuing a warning.
+  config.allow_unknown_urls
+
+  # Timeout if requests take longer than 30 seconds
+  config.timeout = 30
+
+  # Don't raise errors when SSL certificates can't be validated
+  config.ignore_ssl_errors
+
+  # Don't load images
+  config.skip_image_loading
+
+  # Raise JavaScript errors as exceptions
+  config.raise_javascript_errors = true
+end
+
+Capybara.default_max_wait_time = 5
